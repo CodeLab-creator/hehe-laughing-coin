@@ -45,14 +45,6 @@ const HeroSection = () => {
             Join Early 🚀
           </a>
         </div>
-
-        <div className="float-animation mx-auto w-48 md:w-64">
-          <img
-            src={heheLogo}
-            alt="HEHE Coin Mascot"
-            className="w-full rounded-full shadow-2xl ring-4 ring-gold/30"
-          />
-        </div>
       </div>
     </section>
   );
