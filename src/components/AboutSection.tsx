@@ -1,4 +1,4 @@
-import heheLogo from "@/assets/hehe-logo.jpeg";
+import heheLogo from "@/assets/hehe-logo-nobg-2.png";
 
 const AboutSection = () => {
   return (
