@@ -61,9 +61,10 @@ const WaitlistSection = () => {
           />
           <button
             type="submit"
-            className="btn-glow whitespace-nowrap rounded-full bg-gold px-6 py-3 font-heading text-sm font-bold text-foreground"
+            disabled={submitting}
+            className="btn-glow whitespace-nowrap rounded-full bg-gold px-6 py-3 font-heading text-sm font-bold text-foreground disabled:opacity-50"
           >
-            Join Early 🚀
+            {submitting ? "Joining..." : "Join Early 🚀"}
           </button>
         </form>
 
