@@ -3,7 +3,7 @@ import { useEffect, useCallback } from "react";
 const RocketClick = () => {
   const handleClick = useCallback((e: MouseEvent) => {
     const rocket = document.createElement("div");
-    rocket.textContent = "🚀";
+    rocket.textContent = "😂";
     rocket.style.cssText = `
       position: fixed;
       left: ${e.clientX - 12}px;
