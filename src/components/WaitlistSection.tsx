@@ -1,23 +1,41 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
-const BASE_COUNT = 137;
+const FAKE_COUNT = 148;
 
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
-  const [count, setCount] = useState(BASE_COUNT);
+  const [count, setCount] = useState(FAKE_COUNT);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("hehe_visits") || "0";
-    const visits = parseInt(stored) + 1;
-    localStorage.setItem("hehe_visits", String(visits));
-    setCount(BASE_COUNT + visits * 3 + Math.floor(Math.random() * 5));
+    const fetchCount = async () => {
+      const { count: realCount } = await supabase
+        .from("waitlist")
+        .select("*", { count: "exact", head: true });
+      if (realCount !== null) {
+        setCount(FAKE_COUNT + realCount);
+      }
+    };
+    fetchCount();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       toast.error("Please enter a valid email address");
+      return;
+    }
+    setSubmitting(true);
+    const { error } = await supabase.from("waitlist").insert({ email: email.trim().toLowerCase() });
+    setSubmitting(false);
+    if (error) {
+      if (error.code === "23505") {
+        toast.error("This email is already on the waitlist!");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
       return;
     }
     toast.success("You're in! Welcome to the $HEHE family 😂🚀");
@@ -43,9 +61,10 @@ const WaitlistSection = () => {
           />
           <button
             type="submit"
-            className="btn-glow whitespace-nowrap rounded-full bg-gold px-6 py-3 font-heading text-sm font-bold text-foreground"
+            disabled={submitting}
+            className="btn-glow whitespace-nowrap rounded-full bg-gold px-6 py-3 font-heading text-sm font-bold text-foreground disabled:opacity-50"
           >
-            Join Early 🚀
+            {submitting ? "Joining..." : "Join Early 🚀"}
           </button>
         </form>
 
