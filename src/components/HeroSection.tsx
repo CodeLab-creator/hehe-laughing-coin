@@ -1,4 +1,4 @@
-import heheLogo from "@/assets/hehe-logo.jpeg";
+import heheLogo from "@/assets/hehe-logo-nobg.png";
 
 const floatingEmojis = [
   { emoji: "😂", top: "10%", left: "5%", delay: "0s" },
