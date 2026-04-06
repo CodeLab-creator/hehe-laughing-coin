@@ -1,4 +1,4 @@
-import heheLogo from "@/assets/hehe-logo-nobg-2.png";
+import heheMascot from "@/assets/hehe-mascot.png";
 
 const AboutSection = () => {
   return (
@@ -7,7 +7,7 @@ const AboutSection = () => {
         <div className="flex flex-col items-center gap-10 md:flex-row">
           <div className="flex-1 text-center md:text-left">
             <h2 className="mb-4 font-heading text-4xl font-black md:text-5xl">
-              About <span className="text-gold">$HEHE</span>
+              About <span className="text-primary">$HEHE</span>
             </h2>
             <p className="mb-4 text-muted-foreground">
               Meet the coin that left the joke pile and bought the whole internet.
@@ -22,11 +22,18 @@ const AboutSection = () => {
               </p>
             </div>
           </div>
-          <div className="float-animation w-48 shrink-0 md:w-64">
+          <div className="relative w-48 shrink-0 md:w-64">
+            <div
+              className="absolute inset-0 rounded-full blur-2xl"
+              style={{ background: "hsla(43, 100%, 50%, 0.15)" }}
+            />
             <img
-              src={heheLogo}
+              src={heheMascot}
               alt="HEHE Mascot"
-              className="w-full rounded-full shadow-xl ring-4 ring-gold/20"
+              className="float-animation relative z-10 w-full drop-shadow-xl"
+              style={{
+                filter: "drop-shadow(0 0 20px hsla(43, 100%, 50%, 0.3))",
+              }}
             />
           </div>
         </div>
